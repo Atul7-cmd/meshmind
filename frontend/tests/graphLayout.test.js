@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   NODE_HEIGHT, NODE_WIDTH, clipToBox, computeEdgeBends, computeEdgeGeometry,
-  cycleEdgeKeys, edgeKey, layoutGraph, wrapLabel,
+  cycleEdgeKeys, edgeKey, layoutGraph, shortenLabel, wrapLabel,
 } from "../src/services/graphLayout.js";
 
 const n = (id) => ({ id, label: id, type: "service" });
@@ -104,4 +104,11 @@ test("wrapLabel wraps, truncates and handles long words", () => {
 test("cycleEdgeKeys turns closed paths into edge keys", () => {
   assert.deepEqual([...cycleEdgeKeys([["a", "b", "c", "a"]])].sort(), ["a->b", "b->c", "c->a"]);
   assert.equal(cycleEdgeKeys().size, 0);
+});
+
+test("shortenLabel keeps short labels and truncates long ones", () => {
+  assert.equal(shortenLabel("calls"), "calls");
+  const long = shortenLabel("x".repeat(60));
+  assert.equal(long.length, 30);
+  assert.ok(long.endsWith("…"));
 });

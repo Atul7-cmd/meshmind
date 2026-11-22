@@ -9,7 +9,7 @@
 
 export const NODE_WIDTH = 176;
 export const NODE_HEIGHT = 68;
-const GAP_X = 130;
+const GAP_X = 170; // wide enough for a typical edge label between two columns
 const GAP_Y = 40;
 const MARGIN = 56;
 const EDGE_SPACING = 46; // distance between parallel edges that join the same two nodes
@@ -234,4 +234,10 @@ export function cycleEdgeKeys(cycles = []) {
     for (let i = 0; i < path.length - 1; i++) keys.add(edgeKey(path[i], path[i + 1]));
   });
   return keys;
+}
+
+// Edge labels are drawn on the canvas, so very long ones are shortened (the full text stays in the JSON).
+export function shortenLabel(text, maxChars = 30) {
+  const value = String(text);
+  return value.length > maxChars ? value.slice(0, maxChars - 1) + "…" : value;
 }

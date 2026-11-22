@@ -44,7 +44,7 @@
 
 .workspace { display: grid; grid-template-columns: minmax(300px, 380px) minmax(0, 1fr); gap: 1.25rem; align-items: start; }
 
-.panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.2rem; }
+.panel { min-width: 0; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.2rem; }
 
 /* ---------- buttons ---------- */
 .btn {
@@ -137,10 +137,10 @@
 .stats__grid div { background: var(--bg-raised); border: 1px solid var(--line-soft); border-radius: 8px; padding: 0.6rem 0.8rem; }
 .stats__grid dt { color: var(--muted); font-size: 0.82rem; }
 .stats__grid dd { font-size: 1.7rem; font-weight: 700; line-height: 1.2; }
-.stats__summary { color: #cdd9f2; }
+.stats__summary { color: #cdd9f2; overflow-wrap: anywhere; }
 .notice { margin-top: 1rem; padding: 0.7rem 0.9rem; border-radius: 8px; background: var(--bg-raised); border: 1px solid var(--line-soft); }
 .notice h3 { margin-top: 0; }
-.notice ul { padding-left: 1.1rem; display: grid; gap: 0.25rem; font-size: 0.9rem; color: #cdd9f2; }
+.notice ul { overflow-wrap: anywhere; padding-left: 1.1rem; display: grid; gap: 0.25rem; font-size: 0.9rem; color: #cdd9f2; }
 .notice--cycle { border-color: rgba(245, 185, 66, 0.55); }
 .notice--cycle h3 { color: var(--amber); }
 
@@ -157,19 +157,19 @@
 
 /* ---------- responsive ---------- */
 @media (max-width: 1100px) {
-  .details { grid-template-columns: 1fr 1fr; }
+  .details { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .json-viewer { grid-column: 1 / -1; }
 }
 @media (max-width: 960px) {
   .workspace { grid-template-columns: minmax(0, 1fr); }
   .input-panel { position: static; }
-  .steps { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 720px) {
   .navbar__toggle { display: inline-flex; font: inherit; font-size: 0.9rem; color: var(--text); background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; padding: 0.4rem 0.8rem; cursor: pointer; }
   .navbar__links { display: none; width: 100%; flex-direction: column; align-items: flex-start; gap: 0.8rem; padding-top: 0.5rem; }
   .navbar__links.is-open { display: flex; }
-  .details { grid-template-columns: 1fr; }
+  .details { grid-template-columns: minmax(0, 1fr); }
   .canvas { height: 420px; }
   .page { padding-top: 1.4rem; }
 }

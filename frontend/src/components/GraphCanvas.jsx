@@ -7,10 +7,11 @@ import {
   cycleEdgeKeys,
   edgeKey,
   layoutGraph,
+  shortenLabel,
   wrapLabel,
 } from "../services/graphLayout.js";
 
-const MIN_ZOOM = 0.3;
+const MIN_ZOOM = 0.15; // low enough for a wide graph to fit on a phone
 const MAX_ZOOM = 2.5;
 const DRAG_THRESHOLD = 4; // pixels before a press counts as a drag instead of a click
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
@@ -257,7 +258,8 @@ export default function GraphCanvas({
                     <g key={`${key}-${i}`} className={`edge edge--${tone}${dim ? " is-dim" : ""}`}>
                       <path d={geometry.d} markerEnd={`url(#mm-arrow-${tone})`} />
                       <text className="edge__label" x={geometry.labelX} y={geometry.labelY - 5} textAnchor="middle">
-                        {edge.label}
+                        <title>{edge.label}</title>
+                        {shortenLabel(edge.label)}
                       </text>
                     </g>
                   );

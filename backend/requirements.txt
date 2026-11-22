@@ -1,0 +1,4 @@
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30
+# Needed only by FastAPI's TestClient (backend/tests/test_api.py):
+httpx>=0.27
